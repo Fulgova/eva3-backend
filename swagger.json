@@ -3,12 +3,12 @@
   "info": {
     "title": "API RESTful (Solo método GET)",
     "version": "1.0.0",
-    "description": "Documentación del método GET para el recurso de tejelanasVivi."
+    "description": "API RESTful de Tejelanas Vivi para la consulta de productos artesanales, servicios disponibles, información del proyecto y preguntas frecuentes, mediante endpoints seguros que utilizan autenticación Bearer JWT."
   },
   "servers": [
     {
       "url": "https://www.clinicatecnologica.cl/ipss/tejelanasVivi/api/v1",
-      "description": "Servidor de tejelanasVivi"
+      "description": "Endpoint base de la API pública de Tejelanas Vivi"
     }
   ],
   "security": [
@@ -19,68 +19,42 @@
   "paths": {
     "/products-services/": {
       "get": {
-        "summary": "Obtiene la lista de todos los products-services.",
-        "description": "Retorna un array de objetos de products-services. Esta operación está sujeta a limitaciones de tasa.",
+        "summary": "Obtiene la lista completa de productos y servicios de Tejelanas Vivi.",
+        "description": "Retorna un array de los productos y servicios disponibles.",
         "responses": {
           "200": {
             "description": "Operación exitosa.",
             "headers": {
-              "X-RateLimit-Limit": {
-                "schema": {
-                  "type": "integer",
-                  "description": "El límite de peticiones por hora."
-                },
-                "example": 100
-              },
-              "X-RateLimit-Remaining": {
-                "schema": {
-                  "type": "integer",
-                  "description": "El número de peticiones restantes en la hora actual."
-                },
-                "example": 95
-              },
-              "X-RateLimit-Reset": {
-                "schema": {
-                  "type": "integer",
-                  "description": "El timestamp Unix en el que el límite de peticiones se reiniciará."
-                },
-                "example": 1653571200
-              },
-              "Cache-Control": {
-                "schema": {
-                  "type": "string",
-                  "description": "Directivas de control de caché."
-                },
-                "example": "public, max-age=3600"
-              },
-              "ETag": {
-                "schema": {
-                  "type": "string",
-                  "description": "Etiqueta de entidad para la validación de caché."
-                },
-                "example": "W/\"abcdef12345\""
-              }
+              "X-RateLimit-Limit": { "$ref": "#/components/headers/X-RateLimit-Limit" },
+              "X-RateLimit-Remaining": { "$ref": "#/components/headers/X-RateLimit-Remaining" },
+              "X-RateLimit-Reset": { "$ref": "#/components/headers/X-RateLimit-Reset" },
+              "Cache-Control": { "$ref": "#/components/headers/Cache-Control" },
+              "ETag": { "$ref": "#/components/headers/ETag" }
             },
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Servicio"
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "object",
+                      "properties": {
+                        "productos": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Producto"
+                          }
+                        },
+                        "servicios": {
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/components/schemas/Servicio"
+                          }
+                        }
+                      }
+                    }
                   }
-                },
-                "example": [
-                  {
-                    "id": 1,
-                    "nombre": "Consultoría Inicial",
-                    "descripcion": "Evaluación inicial de las necesidades del cliente."
-                  },
-                  {
-                    "id": 2,
-                    "nombre": "Desarrollo de Estrategia",
-                    "descripcion": "Creación de un plan estratégico personalizado."
-                  }
-                ]
+                }
               }
             }
           },
@@ -92,7 +66,7 @@
                   "$ref": "#/components/schemas/Error"
                 },
                 "example": {
-                  "mensaje": "Error al conectar con la base de datos."
+                  "mensaje": "Error de conexión a la base de datos."
                 }
               }
             }
@@ -102,68 +76,23 @@
     },
     "/about-us/": {
       "get": {
-        "summary": "Obtiene la lista de todos los servicios.",
-        "description": "Retorna un array de objetos de servicio. Esta operación está sujeta a limitaciones de tasa.",
+        "summary": "Obtiene la descripción del proyecto de Tejelanas Vivi.",
+        "description": "Retorna un array de la descripción del proyecto.",
         "responses": {
           "200": {
             "description": "Operación exitosa.",
             "headers": {
-              "X-RateLimit-Limit": {
-                "schema": {
-                  "type": "integer",
-                  "description": "El límite de peticiones por hora."
-                },
-                "example": 100
-              },
-              "X-RateLimit-Remaining": {
-                "schema": {
-                  "type": "integer",
-                  "description": "El número de peticiones restantes en la hora actual."
-                },
-                "example": 95
-              },
-              "X-RateLimit-Reset": {
-                "schema": {
-                  "type": "integer",
-                  "description": "El timestamp Unix en el que el límite de peticiones se reiniciará."
-                },
-                "example": 1653571200
-              },
-              "Cache-Control": {
-                "schema": {
-                  "type": "string",
-                  "description": "Directivas de control de caché."
-                },
-                "example": "public, max-age=3600"
-              },
-              "ETag": {
-                "schema": {
-                  "type": "string",
-                  "description": "Etiqueta de entidad para la validación de caché."
-                },
-                "example": "W/\"abcdef12345\""
-              }
+              "X-RateLimit-Limit": { "$ref": "#/components/headers/X-RateLimit-Limit" },
+              "X-RateLimit-Remaining": { "$ref": "#/components/headers/X-RateLimit-Remaining" },
+              "X-RateLimit-Reset": { "$ref": "#/components/headers/X-RateLimit-Reset" },
+              "Cache-Control": { "$ref": "#/components/headers/Cache-Control" },
+              "ETag": { "$ref": "#/components/headers/ETag" }
             },
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Servicio"
-                  }
-                },
-                "example": [
-                  {
-                    "id": 1,
-                    "nombre": "Consultoría Inicial",
-                    "descripcion": "Evaluación inicial de las necesidades del cliente."
-                  },
-                  {
-                    "id": 2,
-                    "nombre": "Desarrollo de Estrategia",
-                    "descripcion": "Creación de un plan estratégico personalizado."
-                  }
-                ]
+                  "$ref": "#/components/schemas/AboutUs"
+                }
               }
             }
           },
@@ -185,68 +114,31 @@
     },
     "/faq/": {
       "get": {
-        "summary": "Obtiene la lista de todos los servicios.",
-        "description": "Retorna un array de objetos de servicio. Esta operación está sujeta a limitaciones de tasa.",
+        "summary": "Obtiene las preguntas frecuentes de Tejelanas Vivi.",
+        "description": "Retorna un array de las preguntas frecuentes (FAQs).",
         "responses": {
           "200": {
             "description": "Operación exitosa.",
             "headers": {
-              "X-RateLimit-Limit": {
-                "schema": {
-                  "type": "integer",
-                  "description": "El límite de peticiones por hora."
-                },
-                "example": 100
-              },
-              "X-RateLimit-Remaining": {
-                "schema": {
-                  "type": "integer",
-                  "description": "El número de peticiones restantes en la hora actual."
-                },
-                "example": 95
-              },
-              "X-RateLimit-Reset": {
-                "schema": {
-                  "type": "integer",
-                  "description": "El timestamp Unix en el que el límite de peticiones se reiniciará."
-                },
-                "example": 1653571200
-              },
-              "Cache-Control": {
-                "schema": {
-                  "type": "string",
-                  "description": "Directivas de control de caché."
-                },
-                "example": "public, max-age=3600"
-              },
-              "ETag": {
-                "schema": {
-                  "type": "string",
-                  "description": "Etiqueta de entidad para la validación de caché."
-                },
-                "example": "W/\"abcdef12345\""
-              }
+              "X-RateLimit-Limit": { "$ref": "#/components/headers/X-RateLimit-Limit" },
+              "X-RateLimit-Remaining": { "$ref": "#/components/headers/X-RateLimit-Remaining" },
+              "X-RateLimit-Reset": { "$ref": "#/components/headers/X-RateLimit-Reset" },
+              "Cache-Control": { "$ref": "#/components/headers/Cache-Control" },
+              "ETag": { "$ref": "#/components/headers/ETag" }
             },
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Servicio"
+                  "type": "object",
+                  "properties": {
+                    "data": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/FAQ"
+                      }
+                    }
                   }
-                },
-                "example": [
-                  {
-                    "id": 1,
-                    "nombre": "Consultoría Inicial",
-                    "descripcion": "Evaluación inicial de las necesidades del cliente."
-                  },
-                  {
-                    "id": 2,
-                    "nombre": "Desarrollo de Estrategia",
-                    "descripcion": "Creación de un plan estratégico personalizado."
-                  }
-                ]
+                }
               }
             }
           },
@@ -265,80 +157,6 @@
           }
         }
       }
-    },
-    "/{id}": {
-      "get": {
-        "summary": "Obtiene un servicio por su ID.",
-        "description": "Retorna los detalles de un servicio específico. Esta operación puede utilizar caché.",
-        "parameters": [
-          {
-            "in": "path",
-            "name": "id",
-            "required": true,
-            "description": "ID del servicio a obtener.",
-            "schema": {
-              "type": "integer"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Servicio encontrado.",
-            "headers": {
-              "Cache-Control": {
-                "schema": {
-                  "type": "string",
-                  "description": "Directivas de control de caché."
-                },
-                "example": "public, max-age=60"
-              },
-              "ETag": {
-                "schema": {
-                  "type": "string",
-                  "description": "Etiqueta de entidad para la validación de caché."
-                },
-                "example": "W/\"zyxw98765\""
-              }
-            },
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Servicio"
-                },
-                "example": {
-                  "id": 1,
-                  "nombre": "Consultoría Inicial",
-                  "descripcion": "Evaluación inicial de las necesidades del cliente."
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Servicio no encontrado.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error"
-                },
-                "example": {
-                  "mensaje": "Servicio no encontrado."
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Error interno del servidor.",
-            "content": {
-              "application/json": {
-                "$ref": "#/components/schemas/Error"
-              },
-              "example": {
-                "mensaje": "Error al obtener el servicio."
-              }
-            }
-          }
-        }
-      }
     }
   },
   "components": {
@@ -346,32 +164,94 @@
       "bearerAuth": {
         "type": "http",
         "scheme": "bearer",
-        "bearerFormat": "JWT"
+        "bearerFormat": "JWT",
+        "description": "Autenticación mediante token JWT. Incluye el token en el encabezado 'Authorization' como: Bearer {token}"
+      }
+    },
+    "headers": {
+      "X-RateLimit-Limit": {
+        "description": "El límite de peticiones por hora.",
+        "schema": { "type": "integer" },
+        "example": 100
+      },
+      "X-RateLimit-Remaining": {
+        "description": "Número de peticiones restantes en la hora actual.",
+        "schema": { "type": "integer" },
+        "example": 95
+      },
+      "X-RateLimit-Reset": {
+        "description": "Timestamp Unix cuando el límite se reinicia.",
+        "schema": { "type": "integer" },
+        "example": 1653571200
+      },
+      "Cache-Control": {
+        "description": "Directivas de control de caché.",
+        "schema": { "type": "string" },
+        "example": "public, max-age=3600"
+      },
+      "ETag": {
+        "description": "Etiqueta para validación de caché.",
+        "schema": { "type": "string" },
+        "example": "W/\"abcdef12345\""
       }
     },
     "schemas": {
+      "Producto": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "nombre": { "type": "string" },
+          "descripcion": { "type": "string" },
+          "tallas": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "colores": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "precio": { "type": "number" },
+          "imgs": {
+            "type": "array",
+            "items": { "type": "string", "format": "uri" }
+          }
+        },
+        "required": ["id", "nombre", "descripcion", "precio"]
+      },
       "Servicio": {
         "type": "object",
         "properties": {
-          "id": {
-            "type": "integer",
-            "description": "ID único del servicio.",
-            "readOnly": true
-          },
-          "nombre": {
-            "type": "string",
-            "description": "Nombre del servicio."
-          },
-          "descripcion": {
-            "type": "string",
-            "description": "Descripción del servicio."
+          "id": { "type": "integer" },
+          "nombre": { "type": "string" },
+          "ubicacion": { "type": "string" },
+          "cupos": { "type": "integer" },
+          "fecha": { "type": "string" },
+          "imgs": {
+            "type": "array",
+            "items": { "type": "string", "format": "uri" }
           }
         },
-        "required": [
-          "id",
-          "nombre",
-          "descripcion"
-        ]
+        "required": ["id", "nombre", "ubicacion", "cupos", "fecha"]
+      },
+      "AboutUs": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "string",
+            "description": "Descripción del proyecto de Tejelanas Vivi."
+          }
+        },
+        "required": ["data"]
+      },
+      "FAQ": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "integer" },
+          "titulo": { "type": "string" },
+          "respuesta": { "type": "string" },
+          "activo": { "type": "boolean" }
+        },
+        "required": ["id", "titulo", "respuesta", "activo"]
       },
       "Error": {
         "type": "object",
@@ -381,9 +261,7 @@
             "description": "Mensaje de error."
           }
         },
-        "required": [
-          "mensaje"
-        ]
+        "required": ["mensaje"]
       }
     }
   }
