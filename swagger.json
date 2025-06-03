@@ -25,9 +25,15 @@
           "200": {
             "description": "Consulta realizada con éxito. Retorna un objeto con dos arrays: 'productos' y 'servicios', cada uno con sus respectivos detalles como nombre, precio, imágenes y más.",
             "headers": {
-              "X-RateLimit-Limit": { "$ref": "#/components/headers/X-RateLimit-Limit" },
-              "X-RateLimit-Remaining": { "$ref": "#/components/headers/X-RateLimit-Remaining" },
-              "X-RateLimit-Reset": { "$ref": "#/components/headers/X-RateLimit-Reset" },
+              "X-RateLimit-Limit": {
+                "$ref": "#/components/headers/X-RateLimit-Limit"
+              },
+              "X-RateLimit-Remaining": {
+                "$ref": "#/components/headers/X-RateLimit-Remaining"
+              },
+              "X-RateLimit-Reset": {
+                "$ref": "#/components/headers/X-RateLimit-Reset"
+              },
               "Cache-Control": { "$ref": "#/components/headers/Cache-Control" },
               "ETag": { "$ref": "#/components/headers/ETag" }
             },
@@ -82,9 +88,15 @@
           "200": {
             "description": "Consulta realizada con éxito. Devuelve un objeto con una cadena que describe el propósito y la visión del proyecto Tejelanas Vivi.",
             "headers": {
-              "X-RateLimit-Limit": { "$ref": "#/components/headers/X-RateLimit-Limit" },
-              "X-RateLimit-Remaining": { "$ref": "#/components/headers/X-RateLimit-Remaining" },
-              "X-RateLimit-Reset": { "$ref": "#/components/headers/X-RateLimit-Reset" },
+              "X-RateLimit-Limit": {
+                "$ref": "#/components/headers/X-RateLimit-Limit"
+              },
+              "X-RateLimit-Remaining": {
+                "$ref": "#/components/headers/X-RateLimit-Remaining"
+              },
+              "X-RateLimit-Reset": {
+                "$ref": "#/components/headers/X-RateLimit-Reset"
+              },
               "Cache-Control": { "$ref": "#/components/headers/Cache-Control" },
               "ETag": { "$ref": "#/components/headers/ETag" }
             },
@@ -120,9 +132,15 @@
           "200": {
             "description": "Consulta realizada con éxito. Devuelve un array de objetos, cada uno con una pregunta frecuente, su respuesta correspondiente y un indicador de visibilidad.",
             "headers": {
-              "X-RateLimit-Limit": { "$ref": "#/components/headers/X-RateLimit-Limit" },
-              "X-RateLimit-Remaining": { "$ref": "#/components/headers/X-RateLimit-Remaining" },
-              "X-RateLimit-Reset": { "$ref": "#/components/headers/X-RateLimit-Reset" },
+              "X-RateLimit-Limit": {
+                "$ref": "#/components/headers/X-RateLimit-Limit"
+              },
+              "X-RateLimit-Remaining": {
+                "$ref": "#/components/headers/X-RateLimit-Remaining"
+              },
+              "X-RateLimit-Reset": {
+                "$ref": "#/components/headers/X-RateLimit-Reset"
+              },
               "Cache-Control": { "$ref": "#/components/headers/Cache-Control" },
               "ETag": { "$ref": "#/components/headers/ETag" }
             },
@@ -216,7 +234,16 @@
             "items": { "type": "string", "format": "uri" }
           }
         },
-        "required": ["id", "nombre", "descripcion", "precio"]
+        "required": ["id", "nombre", "descripcion", "precio"],
+        "example": {
+          "id": 1,
+          "nombre": "Polera deportiva de invierno",
+          "descripcion": "Un polera de material termico ideal para practicar deporte en el invierno.",
+          "tallas": ["S", "M", "L"],
+          "colores": ["rojo", "negro"],
+          "precio": 7200,
+          "imgs": ["https://ejemplo.com/imgs/productos/gorroInvierno1.png"]
+        }
       },
       "Servicio": {
         "type": "object",
@@ -231,7 +258,15 @@
             "items": { "type": "string", "format": "uri" }
           }
         },
-        "required": ["id", "nombre", "ubicacion", "cupos", "fecha"]
+        "required": ["id", "nombre", "ubicacion", "cupos", "fecha"],
+        "example": {
+          "id": 1,
+          "nombre": "Curso Intensivo de futbol",
+          "ubicacion": "cancha 3 - Centro de entrenamiento San Benito",
+          "cupos": 30,
+          "fecha": "07/06/2025",
+          "imgs": ["https://ejemplo.com/imgs/servicios/cursoCrochet1.png"]
+        }
       },
       "AboutUs": {
         "type": "object",
@@ -241,7 +276,10 @@
             "description": "Descripción del proyecto de Tejelanas Vivi."
           }
         },
-        "required": ["data"]
+        "required": ["data"],
+        "example": {
+          "data": "Raíces Creativas es un proyecto que combina tradición y tecnología para dar vida a productos con historia. Nos inspiramos en las costumbres de distintas culturas y las reinterpretamos en diseños modernos, accesibles y funcionales. Nuestro enfoque está en crear valor social y ambiental a través del trabajo colaborativo y el uso responsable de los recursos."
+        }
       },
       "FAQ": {
         "type": "object",
@@ -251,7 +289,13 @@
           "respuesta": { "type": "string" },
           "activo": { "type": "boolean" }
         },
-        "required": ["id", "titulo", "respuesta", "activo"]
+        "required": ["id", "titulo", "respuesta", "activo"],
+        "example": {
+          "id": 1,
+          "titulo": "¿Puedo cambiar el idioma de la aplicación?",
+          "respuesta": "Sí, en la sección de configuración puedes seleccionar el idioma preferido.",
+          "activo": "true"
+        }
       },
       "Error": {
         "type": "object",
